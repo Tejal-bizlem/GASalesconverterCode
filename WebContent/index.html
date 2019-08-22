@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Insert title here</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <body>
+    <a href="https://accounts.google.com/o/oauth2/auth?client_id=90304056428-bbhfall0ts0phf64h033qh70oeeemmoc.apps.googleusercontent.com&redirect_uri=http://localhost:9999/GALeadConverter/googleanalytics.html&response_type=code&scope=https://www.googleapis.com/auth/analytics.readonly&access_type=offline&approval_prompt=force">Google Analytics Login!</a>
+    <!-- 
+        <form method="post">
+            <table>
+                <tr>
+                    <p>Name : <input type="text" id="name" /></p>
+				    <p>Address : <input type="text" id="address" /></p>
+                    <td><input type="button" value="submit" id="submit_json"> </td>
+                    <div id="data"></div>
+                    
+				        
+				      
+				    
+                </tr>
+            </table>
+        </form>
+        
+        <h1>Input User Details</h1>
+	    <form action="rest/demo/register" method="post">
+	        <p>Name : <input type="text" name="name" /></p>
+	        <p>Address : <input type="text" name="address" /></p>
+	        <input type="submit" value="Enter Details" />
+	    </form>
+	    
+	    <h1>Upload File</h1>
+	    <form action="rest/test/upload" method="post" enctype="multipart/form-data">
+	        <p>Select a file : <input type="file" name="file"/></p>
+	        <input type="submit" value="Upload File" />
+	    </form>
+	     -->
+    </body>
+
+    <script type="text/javascript">
+    var code="";
+    $(document).ready(function(){
+    	var queryString = decodeURIComponent(window.location.search);
+	        queryString = queryString.substring(1);
+	    var queries = queryString.split('&');
+        code=queries[0].split('=')[1];
+        alert('code : '+code);
+        GetTokens(code);
+    });
+    
+    function GetTokens(code) {
+    	 // alert("Page is loaded");
+    	 // alert("sent00");
+    	  alert('code : '+code);
+    			
+//    		var accesstoken="ya29.GluqBkJpUDpbLsfeNoHnqPf058RPHBInD7_9MoAjvECg4dfMbxA7wmb0Fom79au6iKTxj4bhM_IlwPLuy82tF9nDzBshHy3tUO3G3yWfOr2sE0RdilF7X5bLhN4C";
+    		//var code="4/6wA28j-TIxpMPB2nGrJiRm0vqWVObZsceGiNZkNBWJhMz0gikof3sXAvwWxI24I-yNTiKlR_5J-yORCD5cTlw8w";
+    		//var clientId="4619478467-mk3ivdso9pv197g5slagcc2i5e236nep.apps.googleusercontent.com";
+    		//var clientSecret="jnc1kKgz7ufbj85T6_mMe7qv";
+    		var clientId="90304056428-bbhfall0ts0phf64h033qh70oeeemmoc.apps.googleusercontent.com";
+    		var clientSecret="xqhKXPo4E52VUEqOShwun-QR";
+    		var uri="http://localhost:9999/GALeadConverter/index.html";
+    		$.ajax({
+    	            url: 'https://www.googleapis.com/oauth2/v4/token',
+    	            //  www.googleapis.com/oauth2/v4/token prompt=consent
+    	            type: "post",
+    	            datatype:"json",
+    	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    	            async : true,
+    	            data: {code:code, prompt:'consent',access_type:'offline',scope:'',client_id:clientId, client_secret:clientSecret, redirect_uri:uri, grant_type:'authorization_code'},
+    	            success: function(response){
+    				//alert(" response = "+JSON.stringify(response));
+    				
+    	                console.log("Response: " + response);
+    					alert(" response = "+response['access_token']);
+    					/*
+    					alert(" response['refresh_token'] = "+response['refresh_token']);
+    	                console.log("AT: " + response['access_token']);
+    	                console.log("RT: " + response['refresh_token']);
+
+    	                access_token = response['access_token'];
+    	                refresh_token = response['refresh_token'];
+    	            */
+    	            }
+    	        })
+    	        .fail(function(err) {
+    	            alert("error" + err); //[Object object]
+    	            console.log("error" + err);
+    	        });
+
+    	}
+        /*
+		    $(document).ready(function(){  
+		    $('#submit_json').click(function(){  
+		        var uname = document.getElementById("name").value;
+		        var password = document.getElementById("address").value;
+		        var JSONObject= {
+		             "uname":uname,
+		             "password":password,
+		             "input":"input_from_server"
+		             };
+		        alert(JSONObject);
+		        var data = {"name":"John Doe"}
+		        $.ajax({  
+		            url:'rest/demo/crunchifyService/',
+		            //headers: { 'Content-Type': 'application/json','accept': 'application/json' },
+		            type:'post',
+		            //data :  JSON.stringify(data), 
+		            data :  JSON.stringify(JSONObject), 
+		            dataType: 'json',
+		            contentType: "application/json",
+		            success: function(data) { 
+		            	     alert(JSON.stringify(data));
+		                     //var jsonData = $.parseJSON(data); //if data is not json
+		                    // alert(jsonData);
+		                    // $('#name').val(jsonData.name);  
+		                    // $('#email').val(jsonData.email);  
+		                }  
+		        });  
+		    });  
+		});
+        
+        $(document).ready(function(){
+            var val = "";
+            $("#submit").click(function(event){
+                event.preventDefault();
+                var data = {"name":"John Doe"}
+                $.ajax({
+                    type: "GET",
+                    dataType:"text",
+                    contentType: "application/json; charset=utf-8",
+                    //data : JSON.stringify(data),
+                    //url:  "http://localhost:9999/WebAppRest/rest/hello",
+                    url:  "rest/demo/",
+                    success: function(data) {
+                    	//application/json; charset=utf-8
+                    	//application/x-www-form-urlencoded; charset=UTF-8
+                    	//dataType json, html, text, etc
+                    	
+                        console.log(data);
+                        alert(data);
+                       // $.each(data, function(j, pdata) {
+                       //     val= val + "[ "+pdata.name +" " + pdata.surname +"]";
+                       // });
+                       // $("#data").text(val);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(' Error in processing! '+textStatus);
+                    }
+                });
+            });
+        });
+        */
+    </script>
+</html>

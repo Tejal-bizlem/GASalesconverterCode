@@ -1,0 +1,152 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Insert title here</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <body>
+    </body>
+
+    <script type="text/javascript">
+    
+    var code="";
+    var access_token="";
+    var refresh_token="";
+    $(document).ready(function(){
+    	var queryString = decodeURIComponent(window.location.search);
+	        queryString = queryString.substring(1);
+	    var queries = queryString.split('&');
+        code=queries[0].split('=')[1];
+        //alert('code : '+code);
+        getTokens(code);
+    });
+   
+    function getTokens(code) {
+    	    alert('code : '+code);
+    		//var accesstoken="ya29.GluqBkJpUDpbLsfeNoHnqPf058RPHBInD7_9MoAjvECg4dfMbxA7wmb0Fom79au6iKTxj4bhM_IlwPLuy82tF9nDzBshHy3tUO3G3yWfOr2sE0RdilF7X5bLhN4C";
+    		//var code="4/6wA28j-TIxpMPB2nGrJiRm0vqWVObZsceGiNZkNBWJhMz0gikof3sXAvwWxI24I-yNTiKlR_5J-yORCD5cTlw8w";
+    		//var clientId="4619478467-mk3ivdso9pv197g5slagcc2i5e236nep.apps.googleusercontent.com";
+    		//var clientSecret="jnc1kKgz7ufbj85T6_mMe7qv";
+    		var clientId="90304056428-bbhfall0ts0phf64h033qh70oeeemmoc.apps.googleusercontent.com";
+    		var clientSecret="xqhKXPo4E52VUEqOShwun-QR";
+    		var uri="http://localhost:9999/GALeadConverter/googleanalytics.html";
+    		//var uri="https://leadautoconvert.com/googleanalytics.html";
+    		$.ajax({
+    	            url: 'https://www.googleapis.com/oauth2/v4/token',
+    	            //  www.googleapis.com/oauth2/v4/token prompt=consent
+    	            type: "post",
+    	            datatype:"json",
+    	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    	            async : true,
+    	            data: {code:code, prompt:'consent',access_type:'offline',scope:'',client_id:clientId, client_secret:clientSecret, redirect_uri:uri, grant_type:'authorization_code'},
+    	            success: function(response){
+    				    //alert(" response = "+JSON.stringify(response));
+    				    console.log("Response: " + JSON.stringify(response));
+    				    console.log("Response: " + response);
+    					//alert(" response['refresh_token'] = "+response['refresh_token']);
+    	                console.log("access_token : " + response['access_token']);
+    	                console.log("refresh_token : " + response['refresh_token']);
+    	                access_token = response['access_token'];
+    	                refresh_token = response['refresh_token'];
+    	                getaccountSummaries(access_token,refresh_token);
+    	                // uncomment above line to get GA data
+    	                //getGoogleAnalyticsReport(access_token,refresh_token);
+    	            }
+    	        })
+    	        .fail(function(err) {
+    	            alert("error" + err); //[Object object]
+    	            console.log("error" + err);
+    	        });
+    	}
+    
+    function getaccountSummaries(access_token,refresh_token) {
+    	console.log("getaccountSummaries : " + access_token);
+	    $.ajax({
+	            url: 'https://www.googleapis.com/analytics/v3/management/accountSummaries',
+	            type: "get",
+	            datatype:"json",
+	            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	            headers: {
+	            	"Authorization": "Bearer "+access_token,
+	            	"Accept":"application/json",
+	            	},
+	            async : true,
+	            data: {},
+	            success: function(response){
+				    //console.log("Response: " + JSON.stringify(response));
+				    var username=response['username'];
+				    console.log("username: " + username);
+				    var items=response['items'];
+				    var webProperties=items[0].webProperties;
+				    var webProperty=webProperties[0];
+				    var profiles=webProperty.profiles;
+				    var profile=profiles[0];
+				    var view_id=profile.id;
+				    var view_name=profile.name;
+				    console.log("view_id: " + view_id+"   view_name: " +view_name);
+				    //profiles id name":"All Web Site Data",
+					//alert(" response['refresh_token'] = "+response['refresh_token']);
+	                getGoogleAnalyticsReport(access_token,refresh_token,username,view_name,view_id);
+	            }
+	        })
+	        .fail(function(err) {
+	            alert("getaccountSummaries error" + err); //[Object object]
+	            console.log("getaccountSummaries error" + err);
+	        });
+	}
+    
+    function getGoogleAnalyticsReport(access_token,refresh_token,username,view_name,view_id) {
+    	 alert('access_token : '+access_token);
+	    var str_start_date="2019-04-17"; //2019-01-21
+        var str_end_date="2019-04-17";  // 2019-03-13
+        var jsonObj = {"str_start_date":str_start_date, "str_end_date":str_end_date, "accessToken":access_token
+        		, "refreshToken":refresh_token,"username":username, "view_name":view_name, "view_id":view_id};
+				
+			$.ajax({
+	            url: 'http://localhost:9999/GALeadConverter/rest/biz/getGAR',
+				//url: 'https://35.236.220.85:8443/GALeadConverter/rest/biz/getGAR',
+				//url: 'http://35.236.154.164:8082/GALeadConverter/rest/biz/getGAR',
+				//url: 'http://35.200.169.114:8082/GALeadConverter/rest/biz/getGAR',
+	            type: "POST",
+	            //datatype:"json",
+	            contentType: "application/json",
+	            processData: false,
+	            async : true,
+	            //data: JSON.stringify({str_start_date:str_start_date, str_end_date:str_end_date,access_token:access_token}),
+	            data: JSON.stringify(jsonObj),
+	            success: function(response){
+	            	alert(" response = "+response);
+				    //alert(" response = "+JSON.stringify(response));
+				    //console.log(" response = "+JSON.stringify(response));
+				}
+	        })
+	        .fail(function(err) {
+	            alert("getGoogleAnalyticsReport error" + err); //[Object object]
+	            console.log("getGoogleAnalyticsReport error " + err);
+	        });
+		/*		
+		$.ajax({
+	            //url: 'http://localhost:9999/GALeadConverter/rest/biz/getGAR',
+				url: 'http://35.200.169.114:8082/GALeadConverter/rest/biz/getGAR',
+	            type: "POST",
+	            //datatype:"json",
+	            contentType: "application/json",
+	            processData: false,
+	            async : true,
+	            //data: JSON.stringify({str_start_date:str_start_date, str_end_date:str_end_date,access_token:access_token}),
+	            data: JSON.stringify(jsonObj),
+	            success: function(response){
+	            	alert(" response = "+response);
+				    //alert(" response = "+JSON.stringify(response));
+				    //console.log(" response = "+JSON.stringify(response));
+				}
+	        })
+	        .fail(function(err) {
+	            alert("getGoogleAnalyticsReport error" + err); //[Object object]
+	            console.log("getGoogleAnalyticsReport error " + err);
+	        });
+		  */
+		 }
+        
+    </script>
+</html>
