@@ -1,5 +1,6 @@
+/Bizlemioconfig.properties
 /PRODconfig.properties
 /com/
 /config.properties
-/devpconfig.properties
+/developmentconfig.properties
 /log4j.properties

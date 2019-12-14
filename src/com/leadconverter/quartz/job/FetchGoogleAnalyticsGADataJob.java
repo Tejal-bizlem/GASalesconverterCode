@@ -3,6 +3,7 @@ package com.leadconverter.quartz.job;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
@@ -21,7 +22,8 @@ public class FetchGoogleAnalyticsGADataJob implements Job{
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		try {
 		    	//System.out.println("Hello Quartz! FetchGoogleAnalyticsGADataJob");
-		    	logger.info("Fetch GoogleAnalytics GAData Job Called !");
+			Date d=new Date();
+		    	logger.info("Fetch GoogleAnalytics GAData Job Called ! at "+d);
 		    	//This Method Call get data from google analytics and save it to "google_analytics_data_temp" collection
 				JSONArray ga_users_json_arr=AnalyticsDataInsertUpdate.findGAUserCredentials();
 				AccesAndRefreshToken.getGAData(ga_users_json_arr);

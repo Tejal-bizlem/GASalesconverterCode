@@ -29,7 +29,7 @@ public class MongoSetupForIP
 		  //addSubscriberInList(new Document());
 		MongoSetupForIP mongoip=new MongoSetupForIP();
 		mongoip.setup();
-		DBCollection coll=mongoip.getCollection("phplisttest","CampDetails");
+		DBCollection coll=mongoip.getCollection("salesautoconvert","CampDetails");
 		
 		DBCursor c1 = coll.find();
 		Iterator<DBObject> sessionCountCursor = c1.iterator();

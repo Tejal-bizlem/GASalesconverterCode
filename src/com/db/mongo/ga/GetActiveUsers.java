@@ -12,7 +12,7 @@ import com.mongodb.DBCursor;
 
 public class GetActiveUsers {
 
-	private static MongoSetup mongo = new MongoSetup("phplisttest");
+	private static MongoSetup mongo = new MongoSetup("salesautoconvert");
 	private static DBCollection collection = null;
 	final static Logger logger = Logger.getLogger(GetActiveUsers.class);
 

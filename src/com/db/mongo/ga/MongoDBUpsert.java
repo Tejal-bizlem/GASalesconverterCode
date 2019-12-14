@@ -8,6 +8,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.WriteResult;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -29,8 +30,14 @@ public class MongoDBUpsert {
 
 	public static void upsertTrue() throws UnknownHostException {
 
-		MongoClient m1 = new MongoClient("localhost");
-
+		String uri = "mongodb://localhost:27017/?ssl=true";
+    	System.setProperty("javax.net.ssl.trustStore","/etc/ssl/firstTrustStore");
+    	System.setProperty("javax.net.ssl.trustStorePassword","bizlem123");
+    	System.setProperty ("javax.net.ssl.keyStore","/etc/ssl/MongoClientKeyCert.jks");
+    	System.setProperty ("javax.net.ssl.keyStorePassword","bizlem123");
+    	////MongoClientOptions.builder().sslEnabled(true).sslInvalidHostNameAllowed(true).build();
+    	MongoClientURI	connectionString = new MongoClientURI(uri);
+		MongoClient m1 = new MongoClient(connectionString);
 		DB db = m1.getDB("test");
 
 		DBCollection coll = db.getCollection("car");
@@ -60,7 +67,14 @@ public class MongoDBUpsert {
 
 		// Get a new connection to the db assuming that it is running
 
-		MongoClient mongoClient = new MongoClient("localhost");
+		String uri = "mongodb://localhost:27017/?ssl=true";
+    	System.setProperty("javax.net.ssl.trustStore","/etc/ssl/firstTrustStore");
+    	System.setProperty("javax.net.ssl.trustStorePassword","bizlem123");
+    	System.setProperty ("javax.net.ssl.keyStore","/etc/ssl/MongoClientKeyCert.jks");
+    	System.setProperty ("javax.net.ssl.keyStorePassword","bizlem123");
+    	////MongoClientOptions.builder().sslEnabled(true).sslInvalidHostNameAllowed(true).build();
+    	MongoClientURI	connectionString = new MongoClientURI(uri);
+		MongoClient mongoClient = new MongoClient(connectionString);
 
 		// //use test as a datbase,use your database here
 		DB db = mongoClient.getDB("test");
@@ -100,8 +114,14 @@ public class MongoDBUpsert {
 
 		// Get a new connection to the db assuming that it is running
 
-		MongoClient mongoClient = new MongoClient("localhost");
-
+		String uri = "mongodb://localhost:27017/?ssl=true";
+    	System.setProperty("javax.net.ssl.trustStore","/etc/ssl/firstTrustStore");
+    	System.setProperty("javax.net.ssl.trustStorePassword","bizlem123");
+    	System.setProperty ("javax.net.ssl.keyStore","/etc/ssl/MongoClientKeyCert.jks");
+    	System.setProperty ("javax.net.ssl.keyStorePassword","bizlem123");
+    	////MongoClientOptions.builder().sslEnabled(true).sslInvalidHostNameAllowed(true).build();
+    	MongoClientURI	connectionString = new MongoClientURI(uri);
+		MongoClient mongoClient = new MongoClient(connectionString);
 		// use test as a database,use your database here
 		DB db = mongoClient.getDB("test");
 
@@ -132,6 +152,7 @@ public class MongoDBUpsert {
 			}
 		} finally {
 			c1.close();
+			mongoClient.close();
 		}
 
 	}
@@ -141,8 +162,14 @@ public class MongoDBUpsert {
 
 		// Get a new connection to the db assuming that it is running
 
-		MongoClient mongoClient = new MongoClient("localhost");
-
+		String uri = "mongodb://localhost:27017/?ssl=true";
+    	System.setProperty("javax.net.ssl.trustStore","/etc/ssl/firstTrustStore");
+    	System.setProperty("javax.net.ssl.trustStorePassword","bizlem123");
+    	System.setProperty ("javax.net.ssl.keyStore","/etc/ssl/MongoClientKeyCert.jks");
+    	System.setProperty ("javax.net.ssl.keyStorePassword","bizlem123");
+    	////MongoClientOptions.builder().sslEnabled(true).sslInvalidHostNameAllowed(true).build();
+    	MongoClientURI	connectionString = new MongoClientURI(uri);
+		MongoClient mongoClient = new MongoClient(connectionString);
 		// //use test as a datbase,use your database here
 		DB db = mongoClient.getDB("test");
 
@@ -173,6 +200,7 @@ public class MongoDBUpsert {
 			}
 		} finally {
 			c1.close();
+			mongoClient.close();
 		}
 
 	}
@@ -182,8 +210,15 @@ public class MongoDBUpsert {
 
 		// Get a new connection to the db assuming that it is running
 
-		MongoClient mongoClient = new MongoClient("localhost");
 
+		String uri = "mongodb://localhost:27017/?ssl=true";
+    	System.setProperty("javax.net.ssl.trustStore","/etc/ssl/firstTrustStore");
+    	System.setProperty("javax.net.ssl.trustStorePassword","bizlem123");
+    	System.setProperty ("javax.net.ssl.keyStore","/etc/ssl/MongoClientKeyCert.jks");
+    	System.setProperty ("javax.net.ssl.keyStorePassword","bizlem123");
+    	////MongoClientOptions.builder().sslEnabled(true).sslInvalidHostNameAllowed(true).build();
+    	MongoClientURI	connectionString = new MongoClientURI(uri);
+		MongoClient mongoClient = new MongoClient(connectionString);
 		// //use test as a datbase,use your database here
 		DB db = mongoClient.getDB("test");
 
@@ -211,6 +246,7 @@ public class MongoDBUpsert {
 			}
 		} finally {
 			c1.close();
+			mongoClient.close();
 		}
 
 	}

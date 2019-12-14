@@ -10,18 +10,48 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
+import org.quartz.SimpleScheduleBuilder;
+import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
 import com.leadconverter.quartz.job.CallRuleEngineJob;
+import com.leadconverter.quartz.job.CampaignSheduleAndActivaterJob;
 import com.leadconverter.quartz.job.FetchPhpListGADataJob;
 import com.leadconverter.quartz.job.ProcessQueueJob;
 
 public class QuartzSchedulerForSingleJob {
 
-	public static void main(String[] args) {
-		QuartzSchedulerForSingleJob qtzscheduler = new QuartzSchedulerForSingleJob();
-		qtzscheduler.runJobs("45","true");
+	public static void main(String[] args) throws ParseException {
+//		QuartzSchedulerForSingleJob qtzscheduler = new QuartzSchedulerForSingleJob();
+//		qtzscheduler.runJobs("45","true");
+		  String campaignSheduleAndActivaterTime="0 0/"+"20"+" * ? * * *";
+		  String FetchGADataTime="0 15 15 * * ? ";
+		   Date now = new Date();
+		System.out.println("campaignSheduleAndActivaterTime= "+campaignSheduleAndActivaterTime+": nows"+now);
+	    try {
+	        SchedulerFactory sf = new StdSchedulerFactory();
+	        Scheduler scheduler = sf.getScheduler();
+	         // specify the job' s details..
+	         JobDetail job = JobBuilder.newJob(TestJob.class)
+	                                   .withIdentity("testJob")
+	                                   .build();
+	 
+	         // specify the running period of the job
+	         JobDetail campaignSheduleAndActivaterJob = JobBuilder.newJob(TestJob.class)
+                     .withIdentity("campaignSheduleAndActivaterJob", "campaign")
+                     .build();
+       
+          CronTrigger campaignSheduleAndActivaterTrigger = TriggerBuilder.newTrigger()
+                          .withIdentity("campaignSheduleAndActivaterTrigger", "campaign89")
+                          .withSchedule( CronScheduleBuilder.cronSchedule(FetchGADataTime))
+                          .build();
+	      Date  campaignSheduleAndActivaterDate= scheduler.scheduleJob(campaignSheduleAndActivaterJob, campaignSheduleAndActivaterTrigger);
+	      scheduler.start();
+        	
+	      } catch (SchedulerException e) {
+	         e.printStackTrace();
+	      }
 	}
 
 	public void runJobs(String sec,String flag) {

@@ -57,7 +57,7 @@
 //
 //public class GAMONGOTest {
 //	private static DBCollection collection = null;
-//	private static MongoSetup   mongo      = new MongoSetup( "phplisttest" );
+//	private static MongoSetup   mongo      = new MongoSetup( "salesautoconvert" );
 //	final static Logger logger = Logger.getLogger(GAMONGOTest.class);
 //	public static void main(String[] args)throws Exception {
 //		//Execution Start From This Main Method
@@ -218,7 +218,7 @@
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
 //	       // mongoClient=ConnectionHelper.getConnection();
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        google_analytics_data_temp=database.getCollection(coll_name);
 //	        google_analytics_url_view_collection=database.getCollection("google_analytics_url_view_collection");
 //	        
@@ -508,7 +508,7 @@
 //    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //    	mongoClient =	new MongoClient(connectionString);
 //      //  mongoClient=ConnectionHelper.getConnection();
-//        database=mongoClient.getDatabase("phplisttest");
+//        database=mongoClient.getDatabase("salesautoconvert");
 //        collection=database.getCollection(coll_name);
 //        
 //        
@@ -680,7 +680,7 @@
 //	    	
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        
 //	        
@@ -855,7 +855,7 @@
 //	        funnelListJsonArr.add("2");
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 ////	        collection=database.getCollection(coll_name);
 //	        //
 //	        
@@ -1574,7 +1574,7 @@
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
 //	  //      mongoClient=ConnectionHelper.getConnection();
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection("campaign_details");
 //	        subscribers_details_collection=database.getCollection("subscribers_details");
 //            Bson filter = and(eq("Campaign_Id", campaign_id),
@@ -1661,7 +1661,7 @@
 //	    	
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection("campaign_details");
 //	        subscribers_details_collection=database.getCollection("subscribers_details");
 //            Bson filter = eq("Campaign_Id", campaign_id);
@@ -1911,7 +1911,7 @@
 //	    
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        
 //	        DistinctIterable<String> dimension2Di = collection.distinct("dimension2", String.class);
@@ -2114,7 +2114,7 @@
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
 //	        //mongoClient=ConnectionHelper.getConnection();
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        
 //	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -2168,7 +2168,7 @@
 //        	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //        	mongoClient =	new MongoClient(connectionString);
 //	     //   mongoClient=ConnectionHelper.getConnection();
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        
 //            Bson filter1 =and(eq("sourceMedium", sourceMedium));
@@ -2235,7 +2235,7 @@
 //	    	
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        google_analytics_data_temp_collection=database.getCollection(coll_name);
 //	        filter1 =eq("dimension2", subscriber_email);
 //			FindIterable<Document> dimension2Fi = google_analytics_data_temp_collection.find(filter1);
@@ -2279,7 +2279,7 @@
 //        	
 //        	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //        	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        DistinctIterable<String> pagePathDi = collection.distinct("pagePath", String.class);
 //	        MongoCursor<String> pagePathCursor = pagePathDi.iterator();
@@ -2371,7 +2371,7 @@
 //        	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //        	mongoClient =	new MongoClient(connectionString);
 //	      //  mongoClient=ConnectionHelper.getConnection();
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        collection.drop();
 //	        //remove(new BasicDBObject());
@@ -2416,7 +2416,7 @@
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
 //	       // mongoClient=ConnectionHelper.getConnection();
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        collection.drop();
 //	        //collection.deleteMany(filter, options)
@@ -2437,7 +2437,7 @@
 //    }
 //	public static String saveTempSubscriberGADataOld(ArrayList<Document> documents,String coll_name ,String username )
 //    {   
-//		MongoSetup   mongo      = new MongoSetup( "phplisttest" );
+//		MongoSetup   mongo      = new MongoSetup( "salesautoconvert" );
 //    	DBCollection temp_google_analytics_subscriber_data = mongo.getCollection( "temp_google_analytics_subscriber_data" );
 //    	             temp_google_analytics_subscriber_data.remove(new BasicDBObject());
 //    	JSONArray data_json_arr = null;
@@ -2464,7 +2464,7 @@
 //        	
 //        	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //        	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        DistinctIterable<String> di = collection.distinct("pagePath", String.class);
 //	        MongoCursor<String> cursor = di.iterator();
@@ -2506,7 +2506,7 @@
 //        	
 //        	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //        	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        //Bson filter1 =eq("funnelNodeName", Sling_Campaign_Id);
 //	        //DistinctIterable<String> fi = collection.distinct("subFunnelNodeName",filter1,String.class);
@@ -2617,7 +2617,7 @@
 //	       // mongoClient=ConnectionHelper.getConnection();
 //	    	connectionString = new MongoClientURI("mongodb://localhost:27017");
 //	    	mongoClient =	new MongoClient(connectionString);
-//	        database=mongoClient.getDatabase("phplisttest");
+//	        database=mongoClient.getDatabase("salesautoconvert");
 //	        collection=database.getCollection(coll_name);
 //	        url_view_collection=database.getCollection("google_analytics_url_view_collection");
 //	        	System.out.println("temp_subscriber_email : "+subscriber_email);

@@ -44,7 +44,7 @@ public static void main(String[] args) {
 	    
 	    try {
 	    	mongoClient=ConnectionHelper.getConnection();
-            database=mongoClient.getDatabase("phplisttest");
+            database=mongoClient.getDatabase("salesautoconvert");
             collection=database.getCollection("campaign_details");
             filter=eq("Campaign_Id", CampaignId);
             
@@ -109,7 +109,7 @@ public static void main(String[] args) {
 	    String ListId=null;
 	    try {
 	    	mongoClient=ConnectionHelper.getConnection();
-            database=mongoClient.getDatabase("phplisttest");
+            database=mongoClient.getDatabase("salesautoconvert");
             collection=database.getCollection("campaign_list_details");
             List<String> subscribers_id_arrlist = new ArrayList<String>();
                          subscribers_id_arrlist.add(SubscriberId);

@@ -23,8 +23,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 
 public class GetTokenForVerifiedWebsites {
-	private static MongoSetup mongo = new MongoSetup("phplisttest");
-	// private static MongoSetupForIP mongo = new MongoSetupForIP( "phplisttest" );
+	private static MongoSetup mongo = new MongoSetup("salesautoconvert");
+	// private static MongoSetupForIP mongo = new MongoSetupForIP( "salesautoconvert" );
 	private static DBCollection collection = null;
 
 	final static Logger logger = Logger.getLogger(GetTokenForVerifiedWebsites.class);
@@ -182,7 +182,9 @@ public class GetTokenForVerifiedWebsites {
 
 					}
 					resp = resp + "===== websites:::final " + websites;
-					String urlstr = "http://prod.bizlem.io:8085/NewMailDev/getFileAttachServlet";
+					String urlstr =ResourceBundle.getBundle("config").getString("sendmaildoctiger");
+							
+							//"http://prod.bizlem.io:8085/NewMailDev/getFileAttachServlet";
 					/*
 					 * {"cc":[],"bcc":[],"attachments":[],"fromPass":"doctiger@123",
 					 * "subject":"Testing12 Send Mail From MailTemlate","to":[

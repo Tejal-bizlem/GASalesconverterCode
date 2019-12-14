@@ -39,7 +39,8 @@ public class QuartzScheduler {
 
 	public void runJobs(String hr,String flag) {
 		try {
-			    logger.info("******************  Sheduler Started  ************************");
+			Date d1=new Date();
+			    logger.info("******************  Sheduler Started  ************************"+d1);
 				// First we must get a reference to a scheduler
 		        SchedulerFactory sf = new StdSchedulerFactory();
 		        Scheduler scheduler = sf.getScheduler();
@@ -53,7 +54,7 @@ public class QuartzScheduler {
 		        		
 		        if(flag.equals("true"))
 		        {
-		          //1. Scheduling And Activating Campaign
+		          //1. Scheduling And Activating Campaign  runs every 30min   0 0/30 * ? * * *
 		          JobDetail campaignSheduleAndActivaterJob = JobBuilder.newJob(CampaignSheduleAndActivaterJob.class)
 		                     .withIdentity("campaignSheduleAndActivaterJob", "campaign")
 		                     .build();
@@ -65,13 +66,13 @@ public class QuartzScheduler {
         	      Date  campaignSheduleAndActivaterDate= scheduler.scheduleJob(campaignSheduleAndActivaterJob, campaignSheduleAndActivaterTrigger);
         	      scheduler.start();
 		        	
-		          //2. Fetching GA Data And Call Rule Engine and add subscribers in list
-        	      
+		          //2. Fetching GA Data And Call Rule Engine and add subscribers in list runs at 18:45 every day
+        	      //0 0 12 * * ?	Every day at noon - 12pm
         	      JobDetail FetchGADataJob = JobBuilder.newJob(FetchGoogleAnalyticsGADataJob.class)
  	                     .withIdentity("FetchGADataJob", "gadata")
  	                     .build();
  		          //String schedule_time_str4="0 0/"+fetch_google_analytics_timestamp+" * ? * * *";
- 		    	  String FetchGADataTime="0 45 18 * * ? ";
+ 		    	  String FetchGADataTime="0 0 23 * * ? ";
  		    	  CronTrigger FetchGADataTrigger = TriggerBuilder.newTrigger()
  		                              .withIdentity("FetchGADataTrigger", "gadata")
  		                              .withSchedule( CronScheduleBuilder.cronSchedule(FetchGADataTime))
@@ -80,10 +81,12 @@ public class QuartzScheduler {
  		    	  scheduler.start();
  		    	  
  		    	  //3. Activating DraftList  //scheduler runs   date is date set for explore+1 like.. if capaign set today then based on rule output next category campaign will sent tomorrow
-		          JobDetail activateDraftListJob = JobBuilder.newJob(ActivateDraftList.class)
+		         //0 0 0 * * ?  Every day at midnight - 12am
+ 		    	  JobDetail activateDraftListJob = JobBuilder.newJob(ActivateDraftList.class)
                              .withIdentity("activateDraftListJob", "draftlist")
                              .build();
-			      String activateDraftListTime="0 0/"+campaign_shedule_and_activater_timestamp+" * ? * * *";
+			     // old String activateDraftListTime="0 0/"+campaign_shedule_and_activater_timestamp+" * ? * * *";
+			      String activateDraftListTime="0 0 0 * * ?";
 			      CronTrigger activateDraftListTigger = TriggerBuilder.newTrigger()
 			                          .withIdentity("activateDraftListTigger", "draftlist")
 			                          .withSchedule( CronScheduleBuilder.cronSchedule(activateDraftListTime))

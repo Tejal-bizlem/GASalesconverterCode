@@ -20,7 +20,16 @@ public class ConnectionHelper {
 	
 	public static MongoClient getConnection(){
 		try {
-			   MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
+
+			String uri = "mongodb://localhost:27017/?ssl=true";
+	    	System.setProperty("javax.net.ssl.trustStore","/etc/ssl/firstTrustStore");
+	    	System.setProperty("javax.net.ssl.trustStorePassword","bizlem123");
+	    	System.setProperty ("javax.net.ssl.keyStore","/etc/ssl/MongoClientKeyCert.jks");
+	    	System.setProperty ("javax.net.ssl.keyStorePassword","bizlem123");
+	    	////MongoClientOptions.builder().sslEnabled(true).sslInvalidHostNameAllowed(true).build();
+	    	
+			
+			MongoClientURI connectionString = new MongoClientURI(uri);
 			   mongoClient = new MongoClient(connectionString);
 			   System.out.println("Connecting to MongoDB  Server new version.......  "+mongoClient.getAddress());
             }

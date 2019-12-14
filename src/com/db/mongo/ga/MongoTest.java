@@ -41,7 +41,7 @@ public class MongoTest {
 	    try {
 	    	//csmdao=new CampaignSheduleMongoDAO();
 	    	mongoClient=ConnectionHelper.getConnection();
-            database=mongoClient.getDatabase("phplisttest");
+            database=mongoClient.getDatabase("salesautoconvert");
             collection=database.getCollection("campaign_list_details");
             
             

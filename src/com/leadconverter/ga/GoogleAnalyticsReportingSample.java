@@ -199,7 +199,9 @@ public class GoogleAnalyticsReportingSample {
             //String str_start_date="2019-01-21";
             //String str_end_date="2019-01-30";
             GetReportsResponse response = fetchData(service,str_start_date,str_end_date,view_id);
+            System.out.println("response= "+response.toString());
             gareport=printResults(response.getReports());
+            System.out.println("gareport= "+gareport.toString());
             //return;
         } catch (IOException e) {
             System.err.println(e.getMessage());
@@ -232,6 +234,11 @@ public class GoogleAnalyticsReportingSample {
                 //.setExpression("ga:timeOnPage")
                 .setAlias("timeOnPage");
         
+        Metric uniqueevent = new Metric()
+                .setExpression("ga:uniqueEvents")
+                //.setExpression("ga:timeOnPage")
+                .setAlias("uniqueEvents");
+        
         //Create the Dimensions object.
         Dimension browser = new Dimension()
                 .setName("ga:browser");
@@ -251,7 +258,10 @@ public class GoogleAnalyticsReportingSample {
         Dimension dateHourMinute = new Dimension().setName("ga:dateHourMinute");
         Dimension country = new Dimension().setName("ga:country");
         Dimension channelGrouping = new Dimension().setName("ga:channelGrouping");
+       
         //ga:country==United
+        //ga:sessionCount ga:dateHourMinute
+
         
      // Create the segment dimension.
         Dimension segmentDimensions = new Dimension()
@@ -275,13 +285,13 @@ public class GoogleAnalyticsReportingSample {
         ReportRequest request = new ReportRequest()
                 .setViewId("ga:"+view_id)
                 .setDateRanges(Arrays.asList(dateRange))
-                .setMetrics(Arrays.asList(bounces,timeOnPage))
+                .setMetrics(Arrays.asList(bounces,timeOnPage,uniqueevent))
                 .setDimensions(Arrays.asList(userEmailId,pagePath,sessionCount,sessionDurationBucket,channelGrouping,country,sourceMedium,hostname,dateHourMinute))
                 .setFiltersExpression("ga:dimension2!=NULL")//purva.sawant@bizlem.com  akhilesh@bizlem.com
                 //.setFiltersExpression("ga:dimension2==geetanjali@bizlem.com")
                 .setOrderBys(list_order_by); //"ga:dimension2!=NULL,ga:source==google"
         
-        ReportRequest request1 = new ReportRequest();
+      //  ReportRequest request1 = new ReportRequest();
         
         //request1.setOrderBys(arg0)
         
@@ -289,6 +299,7 @@ public class GoogleAnalyticsReportingSample {
         
         ArrayList<ReportRequest> requests = new ArrayList<ReportRequest>();
         requests.add(request);
+         System.out.println("requests===== "+requests); 
 
         // Create the GetReportsRequest object.
         getReport = new GetReportsRequest()
@@ -296,6 +307,7 @@ public class GoogleAnalyticsReportingSample {
 
         // Call the batchGet method.
         getResponse=service.reports().batchGet(getReport).execute();
+       // System.out.println("getResponse===== "+getResponse); 
         }catch(Exception ex){
         	logger.info("Inside fetchData() Method Got Error : "+ex.getMessage());
         	System.out.println("Inside fetchData() Method Got Error : "+ex.getMessage());

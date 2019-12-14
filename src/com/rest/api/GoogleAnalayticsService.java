@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -149,7 +150,7 @@ public class GoogleAnalayticsService {
 			while ((line = in.readLine()) != null) {
 				crunchifyBuilder.append(line);
 			}
-			System.out.println("Data Received: " + crunchifyBuilder.toString());
+			//System.out.println("Data Received: " + crunchifyBuilder.toString());
 			JSONParser parser =new JSONParser();
 			JSONObject request_json_obj= (JSONObject) parser.parse(crunchifyBuilder.toString());
 			String str_start_date=request_json_obj.get("str_start_date").toString();
@@ -232,72 +233,99 @@ public class GoogleAnalayticsService {
 	    return Response.status(200).entity(str).build();
 	}
 
-	// api  VerifyWebsiteInGASendAlert12 
-		// http://prod.bizlem.io:8052/GALeadConverter/rest/biz/VerifyWebsiteInGASendAlert12/bizlembizlem1234@gmail.com/viki@gmail.com
-			@GET
-			@Path("/VerifyWebsiteInGASendAlert12/{GAEmail}/{Email}")   
-			public String callVerifyWebsite(@PathParam("GAEmail") String GAEmail,
-					@PathParam("Email") String Email){
-			
-				String resp="1";
-//				String GAemail = request.getParameter("GAEmail");
-//				String email = request.getParameter("Email");
-				
-				resp=GetTokenForVerifiedWebsites.VerifyWebsites( GAEmail, Email);
-				return resp;
-			}
-			
 		
-			// http://prod.bizlem.io:8052/GALeadConverter/rest/biz/getActiveUsers/viki@gmail.com
-			//http://prod.bizlem.io:8052/GALeadConverter/rest/biz/callruleng/viki@gmail.com
-				@GET
-				@Path("/getActiveUsers/{Email}")   
-				public String getActiveUsres(@PathParam("Email") String Email){
-				
-					String resp="";
-					resp=GetActiveUsers.getActiveUsres(  Email);
-				//	JSONArray ga_users_json_arr=AnalyticsDataInsertUpdate.findGAUserCredentials();
-				//	resp="-----    findGAUserCredentials ---------"+ga_users_json_arr.toString();
-					//AccesAndRefreshToken.getGAData(ga_users_json_arr);
-					
-			//	JSONArray jsa=	GAMongoDAO.saveGADataForSubscribersView("google_analytics_data_temp");
-					//This Method Call used to create JSON object for RuleEngine
-						return resp+"jsa== ";
-					
-				}
-				// http://prod.bizlem.io:8052/GALeadConverter/rest/biz/callruleng/viki@gmail.com
-				@GET
-				@Path("/callruleng/{Email}")   
-				public String callruleeng(@PathParam("Email") String Email){
-				
-					JSONArray jsa=		GAMongoDAO.fetchGADataForRuleEngine("google_analytics_data_temp");
-					
-					return "jsa== "+jsa.toString();
-					
-				}
-				
-				//     http://prod.bizlem.io:8052/GALeadConverter/rest/biz/saveforruleng/viki@gmail.com
-				@GET
-				@Path("/saveforruleng/{Email}")   
-				public String savedataruleeng(@PathParam("Email") String Email){
-				
-					JSONArray jsa=		GAMongoDAO.saveGADataForSubscribersView("google_analytics_data_temp");
-					
-					return "jsa== "+jsa.toString();
-					
-				}
-//			     http://prod.bizlem.io:8052/GALeadConverter/rest/biz/callGAFetch/viki@gmail.com
+//			     http://bizlem.io:8087/GASalesConverter/rest/biz/callGAdataFetch
 							@GET
-							@Path("/callGAFetch/{Email}")   
-							public String callGAFetch(@PathParam("Email") String Email){
-							
-								JSONArray ga_users_json_arr=AnalyticsDataInsertUpdate.findGAUserCredentials();
-								AccesAndRefreshToken.getGAData(ga_users_json_arr);
-							
-								
-								return "jsa== "+ga_users_json_arr.toString();
+							@Path("/callGAdataFetch")   
+							public String callGAFetch(){
+								JSONObject jsresp=new JSONObject();
+								String resp="";
+								try {
+							    
+								Date d=new Date();
+								resp=d.toString();
+							    	//This Method Call get data from google analytics and save it to "google_analytics_data_temp" collection
+									JSONArray ga_users_json_arr=AnalyticsDataInsertUpdate.findGAUserCredentials();
+									AccesAndRefreshToken.getGAData(ga_users_json_arr);
+									//This Method Call get data from "google_analytics_data_temp" collection. Do the statistics and save it 
+									// to "google_analytics_url_view_collection" collection
+									GAMongoDAO.saveGADataForSubscribersView("google_analytics_data_temp");
+									//This Method Call used to create JSON object for RuleEngine
+									GAMongoDAO.fetchGADataForRuleEngine("google_analytics_data_temp");
+									jsresp.put("tokenarray", ga_users_json_arr);
+									resp=jsresp.toString();
+								}catch (Exception ex){
+									return resp +ex.toString();
+							    }
+								return resp;
 								
 							}
+							
+							
+
+//						     http://bizlem.io:8087/GASalesConverter/rest/biz/saveurlviewdata
+										@GET
+										@Path("/saveurlviewdata")   
+										public String saveurlview(){
+											
+											String resp="";
+											try {
+										    
+											Date d=new Date();
+											resp=d.toString();
+										    	GAMongoDAO.saveGADataForSubscribersView("google_analytics_data_temp");
+												//This Method Call used to create JSON object for RuleEngine
+													
+											}catch (Exception ex){
+												return resp +ex.toString();
+										    }
+											return resp;
+											
+										}
+										
+//									     http://bizlem.io:8087/GASalesConverter/rest/biz/callfirerule
+													@GET
+													@Path("/callfirerule")   
+													public String fireurlview(){
+														
+														String resp="";
+														try {
+													    
+														Date d=new Date();
+														resp=d.toString();
+													    
+															GAMongoDAO.fetchGADataForRuleEngine("google_analytics_data_temp");
+															
+														}catch (Exception ex){
+															return resp +ex.toString();
+													    }
+														return resp;
+														
+													}
 				
-			
+													
+//												     http://bizlem.io:8087/GASalesConverter/rest/biz/getGAdatatotemp
+																@GET
+																@Path("/getGAdatatotemp")   
+																public String savegadatatemp(){
+																	
+																	String resp="";
+																	try {
+																    
+																		Date d=new Date();
+																		resp=d.toString();
+																	    	//This Method Call get data from google analytics and save it to "google_analytics_data_temp" collection
+																			JSONArray ga_users_json_arr=AnalyticsDataInsertUpdate.findGAUserCredentials();
+																			AccesAndRefreshToken.getGAData(ga_users_json_arr);
+																			resp=ga_users_json_arr.toString();
+																	}catch (Exception ex){
+																		return resp +ex.toString();
+																    }
+																	return resp;
+																	
+																}
+																
+																
+																
+//															
 }

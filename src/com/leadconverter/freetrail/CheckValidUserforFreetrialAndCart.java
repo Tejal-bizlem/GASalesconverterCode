@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public class CheckValidUserforFreetrialAndCart {
 	
 	public static void main(String args[]) {
-		checkValiditytrialCart("viki@gmail.com") ;
+		checkValiditytrialCart("viki_gmail.com") ;
 		
 	}
 	public static String checkValiditytrialCart(String userid) {

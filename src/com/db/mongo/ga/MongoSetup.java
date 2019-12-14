@@ -50,6 +50,7 @@ public class MongoSetup
 
     public DBCollection getCollection( String database, String collection )
     {
+    	
         this.database = mongo.getDB( database );
         return this.database.getCollection( collection );
     }
