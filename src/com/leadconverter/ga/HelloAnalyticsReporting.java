@@ -44,11 +44,29 @@ import com.google.api.services.analyticsreporting.v4.model.Report;
 import com.google.api.services.analyticsreporting.v4.model.ReportRequest;
 import com.google.api.services.analyticsreporting.v4.model.ReportRow;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HelloAnalyticsReporting.
+ */
 public class HelloAnalyticsReporting {
+  
+  /** The Constant APPLICATION_NAME. */
   private static final String APPLICATION_NAME = "Lead Auto Converter";
+  
+  /** The Constant JSON_FACTORY. */
   private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+  
+  /** The Constant KEY_FILE_LOCATION. */
   private static final String KEY_FILE_LOCATION = "E://bizlem//GoogleAnalytics//client_secrets_service.json";
+  
+  /** The Constant VIEW_ID. */
   private static final String VIEW_ID = "187146075";//187094993 187250921 187146075
+  
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
   public static void main(String[] args) {
     try {
       AnalyticsReporting service = initializeAnalyticsReporting();
@@ -66,8 +84,8 @@ public class HelloAnalyticsReporting {
    * Initializes an Analytics Reporting API V4 service object.
    *
    * @return An authorized Analytics Reporting API V4 service object.
-   * @throws IOException
-   * @throws GeneralSecurityException
+   * @throws GeneralSecurityException the general security exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private static AnalyticsReporting initializeAnalyticsReporting() throws GeneralSecurityException, IOException {
 
@@ -86,7 +104,7 @@ public class HelloAnalyticsReporting {
    *
    * @param service An authorized Analytics Reporting API V4 service object.
    * @return GetReportResponse The Analytics Reporting API V4 response.
-   * @throws IOException
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   private static GetReportsResponse getReport(AnalyticsReporting service) throws IOException {
 	  

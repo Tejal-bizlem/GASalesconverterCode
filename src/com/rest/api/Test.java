@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.rest.api;
 
 import java.io.IOException;
@@ -86,7 +89,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Test.
+ */
 public class Test {
+	
+	/** The Constant logger. */
 	final static Logger logger = Logger.getLogger(Test.class);
 	
 	/**
@@ -104,7 +113,8 @@ public class Test {
     
     ///usr/local/GoogleAnalyticsJsonFile
     
-    private static final java.io.File DATA_STORE_DIR1 =
+    /** The Constant DATA_STORE_DIR1. */
+   private static final java.io.File DATA_STORE_DIR1 =
             new java.io.File("E://bizlem//GoogleAnalytics//client_secrets_service.json");
     
     //"E://bizlem//GoogleAnalytics//client_secrets_service.json"
@@ -121,13 +131,17 @@ public class Test {
     /** Global instance of the JSON factory. */
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
+    /** The service. */
     private static AnalyticsReporting service ;
 
-    /** Authorizes the installed application to access user's private data.
+    /**
+     *  Authorizes the installed application to access user's private data.
      *  client_secrets.json can be downloaded from Google developer console.
-     *
+     * 
      *  Make sure to enable the Google Analytics reporting api and create Oauth2 credentials.
-     * */
+     *
+     * @param args the arguments
+     */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DateFormat date_formatter_with_timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -135,6 +149,12 @@ public class Test {
 		getGAData(ga_users_json_arr);
 	}
 	
+	/**
+	 * Gets the GA data.
+	 *
+	 * @param ga_users_json_arr the ga users json arr
+	 * @return the GA data
+	 */
 	public static void getGAData(JSONArray ga_users_json_arr) {
 		String response_code=null;
 		if(ga_users_json_arr.size()!=0){
@@ -209,6 +229,16 @@ public class Test {
 	
 	
 		
+		/**
+		 * Gets the GA report.
+		 *
+		 * @param innput the innput
+		 * @param accessToken the access token
+		 * @param str_start_date the str start date
+		 * @param str_end_date the str end date
+		 * @param view_id the view id
+		 * @return the GA report
+		 */
 		public static JSONObject getGAReport(String innput,String accessToken,String str_start_date,String str_end_date,String view_id) {
 	    	JSONObject gareport=null;
 	        try {
@@ -232,7 +262,17 @@ public class Test {
 	        return gareport;
 	        //System.exit(1);
 	    }
-		/** Fetching the data from Google Analytics and returning the response*/
+		
+		/**
+		 *  Fetching the data from Google Analytics and returning the response.
+		 *
+		 * @param service the service
+		 * @param str_start_date the str start date
+		 * @param str_end_date the str end date
+		 * @param view_id the view id
+		 * @return the gets the reports response
+		 * @throws IOException Signals that an I/O exception has occurred.
+		 */
 	    public static GetReportsResponse fetchData(AnalyticsReporting service,String str_start_date,String str_end_date,String view_id) throws IOException{
             GetReportsRequest getReport =null;
 	    	GetReportsResponse getResponse=null;
@@ -328,11 +368,24 @@ public class Test {
 	    	
 	    }
 
+		/**
+		 * Authorize tkn.
+		 *
+		 * @param accessToken the access token
+		 * @return the credential
+		 * @throws Exception the exception
+		 */
 		private static Credential authorizeTkn(String accessToken) throws Exception {
 	        GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
 	        return credential;
 	    }
-		/** Printing the results. */
+		
+		/**
+		 *  Printing the results.
+		 *
+		 * @param reports the reports
+		 * @return the JSON object
+		 */
 	    @SuppressWarnings("unchecked")
 		private static JSONObject printResults(List<Report> reports) {
 	    	//JSONParser parser =new JSONParser();
@@ -427,7 +480,13 @@ public class Test {
 	    
 	    
 	    
-	    private static void multipleSegmentsRequest(AnalyticsReporting analyticsreporting) throws IOException {
+	    /**
+    	 * Multiple segments request.
+    	 *
+    	 * @param analyticsreporting the analyticsreporting
+    	 * @throws IOException Signals that an I/O exception has occurred.
+    	 */
+    	private static void multipleSegmentsRequest(AnalyticsReporting analyticsreporting) throws IOException {
 			  // Create the DateRange object.
 			  DateRange dateRange = new DateRange();
 			  dateRange.setStartDate("2019-05-23");
@@ -466,7 +525,16 @@ public class Test {
 
 			  System.out.println(printResults(response.getReports()));
 			}
-	    private static Segment buildSimpleSegment(
+	    
+    	/**
+    	 * Builds the simple segment.
+    	 *
+    	 * @param segmentName the segment name
+    	 * @param dimension the dimension
+    	 * @param dimensionFilterExpression the dimension filter expression
+    	 * @return the segment
+    	 */
+    	private static Segment buildSimpleSegment(
 			    String segmentName, String dimension, String dimensionFilterExpression) {
 			  // Create Dimension Filter.
 			  SegmentDimensionFilter dimensionFilter =
@@ -503,7 +571,13 @@ public class Test {
 			  return segment;
 			}
 	    
-	    public static void DateDifferentExample(String dateStart,String dateStop){
+	    /**
+    	 * Date different example.
+    	 *
+    	 * @param dateStart the date start
+    	 * @param dateStop the date stop
+    	 */
+    	public static void DateDifferentExample(String dateStart,String dateStop){
 			//HH converts hour in 24 hours format (0-23), day calculation
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		

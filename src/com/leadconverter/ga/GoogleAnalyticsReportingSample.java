@@ -44,12 +44,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+// TODO: Auto-generated Javadoc
 /**
- * Sample for the Google Analytics reporting API with java
+ * Sample for the Google Analytics reporting API with java.
  *
  * @author Linda Lawton
  */
 public class GoogleAnalyticsReportingSample {
+	
+	/** The Constant logger. */
 	final static Logger logger = Logger.getLogger(AccesAndRefreshToken.class);
 
     /**
@@ -67,7 +70,8 @@ public class GoogleAnalyticsReportingSample {
     
     ///usr/local/GoogleAnalyticsJsonFile
     
-    private static final java.io.File DATA_STORE_DIR1 =
+    /** The Constant DATA_STORE_DIR1. */
+   private static final java.io.File DATA_STORE_DIR1 =
             new java.io.File("E://bizlem//GoogleAnalytics//client_secrets_service.json");
     
     //"E://bizlem//GoogleAnalytics//client_secrets_service.json"
@@ -84,13 +88,18 @@ public class GoogleAnalyticsReportingSample {
     /** Global instance of the JSON factory. */
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
+    /** The service. */
     private static AnalyticsReporting service ;
 
-    /** Authorizes the installed application to access user's private data.
+    /**
+     *  Authorizes the installed application to access user's private data.
      *  client_secrets.json can be downloaded from Google developer console.
-     *
+     * 
      *  Make sure to enable the Google Analytics reporting api and create Oauth2 credentials.
-     * */
+     *
+     * @return the credential
+     * @throws Exception the exception
+     */
     private static Credential authorize() throws Exception {
     	InputStream in    = new FileInputStream("E://bizlem//GoogleAnalytics//client_secrets_123.json");
     	//InputStream in    = new FileInputStream("/usr/local/GoogleAnalyticsJsonFile/client_secrets_123.json");
@@ -110,6 +119,13 @@ public class GoogleAnalyticsReportingSample {
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
     
+    /**
+     * Authorize tkn.
+     *
+     * @param accessToken the access token
+     * @return the credential
+     * @throws Exception the exception
+     */
     private static Credential authorizeTkn(String accessToken) throws Exception {
         GoogleCredential credential = new GoogleCredential().setAccessToken(accessToken);
         /*
@@ -130,6 +146,11 @@ public class GoogleAnalyticsReportingSample {
           return credential;
         }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args) {
         try {
             httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -183,6 +204,16 @@ public class GoogleAnalyticsReportingSample {
         System.exit(1);
     }
     
+    /**
+     * Gets the GA report.
+     *
+     * @param innput the innput
+     * @param accessToken the access token
+     * @param str_start_date the str start date
+     * @param str_end_date the str end date
+     * @param view_id the view id
+     * @return the GA report
+     */
     public static JSONObject getGAReport(String innput,String accessToken,String str_start_date,String str_end_date,String view_id) {
     	JSONObject gareport=null;
         try {
@@ -211,7 +242,17 @@ public class GoogleAnalyticsReportingSample {
         return gareport;
         //System.exit(1);
     }
-    /** Fetching the data from Google Analytics and returning the response*/
+    
+    /**
+     *  Fetching the data from Google Analytics and returning the response.
+     *
+     * @param service the service
+     * @param str_start_date the str start date
+     * @param str_end_date the str end date
+     * @param view_id the view id
+     * @return the gets the reports response
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static GetReportsResponse fetchData(AnalyticsReporting service,String str_start_date,String str_end_date,String view_id) throws IOException{
         GetReportsRequest getReport =null;
     	GetReportsResponse getResponse=null;
@@ -317,7 +358,15 @@ public class GoogleAnalyticsReportingSample {
     	
     }
 
-    /** Fetching the data from Google Analytics and returning the response*/
+    /**
+     *  Fetching the data from Google Analytics and returning the response.
+     *
+     * @param service the service
+     * @param str_start_date the str start date
+     * @param str_end_date the str end date
+     * @return the gets the reports response
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static GetReportsResponse fetchDataBackUP(AnalyticsReporting service,String str_start_date,String str_end_date) throws IOException{
 
     	DateRange dateRange = new DateRange();
@@ -383,7 +432,12 @@ public class GoogleAnalyticsReportingSample {
         return service.reports().batchGet(getReport).execute();
     }
 
-    /** Printing the results. */
+    /**
+     *  Printing the results.
+     *
+     * @param reports the reports
+     * @return the JSON object
+     */
     @SuppressWarnings("unchecked")
 	private static JSONObject printResults(List<Report> reports) {
     	//JSONParser parser =new JSONParser();

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.rest.api;
 
 import java.util.ArrayList;
@@ -15,8 +18,17 @@ import org.json.JSONObject;
 import com.db.mongo.ga.AnalyticsDataInsertUpdate;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JsonSortingMethods.
+ */
 public class JsonSortingMethods {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String jsonArrStr = "[ { \"ga:sessionCount\": \"102\", \"Name\": \"Fargo Chan\" },{ \"ga:sessionCount\": \"135\", \"Name\": \"Fargo Chan\" },{ \"ga:sessionCount\": \"1375\", \"Name\": \"Fargo Chan\" },{ \"ga:sessionCount\": \"4432\", \"Name\": \"Aaron Luke\" },{ \"ga:sessionCount\": \"2452\", \"Name\": \"Dilip Singh\" },{ \"ga:sessionCount\": \"2502\", \"Name\": \"Fargo Chan\" },{ \"ga:sessionCount\": \"2521\", \"Name\": \"Fargo Chan\" },{ \"ga:sessionCount\": \"1020\", \"Name\": \"Fargo Chan\" }]";
@@ -30,7 +42,15 @@ public class JsonSortingMethods {
 		}
 	}
 	
-	public static JSONArray sortJsonArray(String jsonArrStr,String ga_user){
+	/**
+	 * Sort json array.
+	 *
+	 * @param jsonArrStr the json arr str
+	 * @param ga_user the ga user
+	 * @return the JSON array
+	 * @throws JSONException 
+	 */
+	public static JSONArray sortJsonArray(String jsonArrStr,String ga_user) throws JSONException{
 		  //I assume that we need to create a JSONArray object from the following string
 		    JSONArray jsonArr = new JSONArray(jsonArrStr);
 		    JSONArray sortedJsonArray = new JSONArray();
@@ -73,7 +93,14 @@ public class JsonSortingMethods {
 		    return sortedJsonArray;
 	}
 	
-	public static void getUniqueRecordsForJsonFields(String jsonArrStr){
+	/**
+	 * Gets the unique records for json fields.
+	 *
+	 * @param jsonArrStr the json arr str
+	 * @return the unique records for json fields
+	 * @throws JSONException 
+	 */
+	public static void getUniqueRecordsForJsonFields(String jsonArrStr) throws JSONException{
 		  //I assume that we need to create a JSONArray object from the following string
 			String country=null;
 			String pagePath=null;
@@ -117,6 +144,11 @@ public class JsonSortingMethods {
 		    //printGAFieldsStringUniqueValues(sourceMediumUniqueValues);
 	}
 	
+	/**
+	 * Prints the GA fields string unique values.
+	 *
+	 * @param FieldsUniqueValues the fields unique values
+	 */
 	public static void printGAFieldsStringUniqueValues(TreeSet<String> FieldsUniqueValues){
 		// create ascending iterator
 	      Iterator iterator;
@@ -129,6 +161,12 @@ public class JsonSortingMethods {
 	      }
 		
 	}
+	
+	/**
+	 * Prints the GA fields integer unique values.
+	 *
+	 * @param FieldsUniqueValues the fields unique values
+	 */
 	public static void printGAFieldsIntegerUniqueValues(TreeSet<Integer> FieldsUniqueValues){
 		// create ascending iterator
 	      Iterator iterator;
@@ -159,7 +197,13 @@ public class JsonSortingMethods {
 	
 	
 	
-	public static void sortBackJsonArray(String jsonArrStr){
+	/**
+	 * Sort back json array.
+	 *
+	 * @param jsonArrStr the json arr str
+	 * @throws JSONException 
+	 */
+	public static void sortBackJsonArray(String jsonArrStr) throws JSONException{
 		  //I assume that we need to create a JSONArray object from the following string
 		    		    JSONArray jsonArr = new JSONArray(jsonArrStr);
 		    JSONArray sortedJsonArray = new JSONArray();

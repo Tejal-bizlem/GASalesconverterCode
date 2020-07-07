@@ -18,6 +18,9 @@
     <servlet-name>jersey-serlvet</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+  <listener>
+ <listener-class>com.leadconverter.ga.MongoConnectionServlet</listener-class>
+</listener>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

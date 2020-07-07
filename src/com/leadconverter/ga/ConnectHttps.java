@@ -26,8 +26,20 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.ResourceBundle;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConnectHttps.
+ */
 public class ConnectHttps {
+	
+	/** The Constant logger. */
 	final static Logger logger = Logger.getLogger(ConnectHttps.class);
+  
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
   public static void main(String[] args)  {
 	  
 		try {
@@ -88,6 +100,12 @@ public class ConnectHttps {
     }
   */}
   
+  /**
+   * Gets the token by refresh token.
+   *
+   * @param refresh_token the refresh token
+   * @return the token by refresh token
+   */
   public static JSONObject getTokenByRefreshToken(String refresh_token)  {
 	   	 JSONObject respose_json_object=null;
 	   	 HttpURLConnection conn=null;

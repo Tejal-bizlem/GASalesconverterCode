@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.rest.api;
 
 import org.json.simple.JSONArray;
@@ -6,8 +9,17 @@ import com.db.mongo.ga.AnalyticsDataInsertUpdate;
 import com.db.mongo.ga.GAMongoDAO;
 import com.google.api.AccesAndRefreshToken;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GetGAData.
+ */
 public class GetGAData {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//logger.info("Fetch GoogleAnalytics GAData Job Called !");

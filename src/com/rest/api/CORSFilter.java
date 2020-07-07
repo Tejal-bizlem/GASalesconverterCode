@@ -1,10 +1,21 @@
+/*
+ * 
+ */
 package com.rest.api;
 
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerResponse;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CORSFilter.
+ */
 public class CORSFilter implements ContainerResponseFilter {
+    
+    /* (non-Javadoc)
+     * @see com.sun.jersey.spi.container.ContainerResponseFilter#filter(com.sun.jersey.spi.container.ContainerRequest, com.sun.jersey.spi.container.ContainerResponse)
+     */
     @Override
     public ContainerResponse filter(ContainerRequest request,
             ContainerResponse response) {
